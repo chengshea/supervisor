@@ -10,8 +10,8 @@ import com.cs.dto.Message;
 public class GlobalExceptionController {
 
 	@ResponseBody
-    @ExceptionHandler(RuntimeException.class)
-    public Message handleException(RuntimeException e) {
+    @ExceptionHandler(Exception.class)
+    public Message handleException(Exception e) {
       
         String msg = e.getMessage();
         if (msg == null || msg.equals("")) {

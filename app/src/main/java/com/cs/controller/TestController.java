@@ -2,20 +2,25 @@ package com.cs.controller;
 
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.RequestContext;
 
 import com.cs.dto.Message;
+import com.cs.tool.Files;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -55,5 +60,52 @@ public class TestController {
 		
 	}
 	
+	
+	@ApiOperation(value = "文件", notes = "传")
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@ResponseBody
+	public Message file(@ApiParam( value="文件",required = true)
+	          MultipartFile file
+	       ) {
+		String path = null;
+		
+		String filename = file.getOriginalFilename();
+		if(filename!=null){
+			String root = RequestContext.class.getResource("/").getFile();
+			try {
+				path = new File(root).getParentFile().getParentFile().getCanonicalPath();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Map<String,Object> m=new HashMap<String,Object>();
+		
+		StringBuilder sb = new StringBuilder().append(path).append(File.separator).append("upload").append(File.separator).append(filename);
+		File url= new File(sb.toString());
+		if(!url.getParentFile().exists())
+			url.getParentFile().mkdirs();
+		try {
+			file.transferTo(url);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		    m.put("path", url);
+			return new Message(1, m, "上传成功");
+		
+	}
+	
+	@ApiOperation(value = "多文件", notes = "少jar包测试")
+	@RequestMapping(value = "/uploads", method = RequestMethod.POST)
+	@ResponseBody
+	public Message files(@ApiParam( value="文件",required = true)
+	          MultipartFile file,@ApiParam( value="文件",required = true)
+             @RequestParam("file1") MultipartFile file1,HttpServletRequest request
+	       ) {
+		Map<String,Object> m=new HashMap<String,Object>();
+		String load = Files.load(request);
+		   m.put("path", load);
+			return new Message(1, m, "上传成功");
+		
+	}
 
 }
