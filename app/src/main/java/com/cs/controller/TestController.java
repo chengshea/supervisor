@@ -25,12 +25,13 @@ import com.cs.tool.Files;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-@Api(description = "测试")
+@Api(tags = "测试")
 @Controller
 @RequestMapping("/api")
 public class TestController {
 
 
+	
 
 	@ApiOperation(value = "登录", notes = "测试登陆")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -39,15 +40,8 @@ public class TestController {
 	         @RequestParam(value = "user",defaultValue="123") String user,
 	         @ApiParam(value="密码",required=true)@RequestParam(value = "pwd",defaultValue="456") String pwd
 	       ) {
-	    boolean flag =false;
-		if(user.equals("123") && pwd.equals("456"))
-			flag=true;
-		
-		
-    
-	
-		
-		if (flag==true) {
+	   
+		if (user.equals("123") && pwd.equals("456")) {
 			String uiId = UUID.randomUUID().toString().replaceAll("-", "");
 			Map<String,Object> m=new HashMap<String,Object>();
 			m.put("uiId", uiId);
