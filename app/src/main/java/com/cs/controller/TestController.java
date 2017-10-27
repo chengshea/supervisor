@@ -25,7 +25,7 @@ import com.cs.tool.Files;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-@Api(tags = "测试")
+@Api(tags = {"test"},description="测试")
 @Controller
 @RequestMapping("/api")
 public class TestController {

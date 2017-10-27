@@ -1,28 +1,34 @@
 package com.cs.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.cs.dto.Message;
 
-@ControllerAdvice
+//@ControllerAdvice
+@RestControllerAdvice 
 public class GlobalExceptionController {
 
 	private Logger logger = LoggerFactory.getLogger(GlobalExceptionController.class);
 	
-	@ResponseBody
+	//@ResponseBody
     @ExceptionHandler(Exception.class)
     public Message handleException(Exception e) {
-      
-        String msg = e.getMessage();
-        if (msg == null || msg.equals("")) {
-        	return new Message(0, "", "服务器出错");
-        }
-        logger.error(msg);
-		return new Message(0, "", "叫后台小哥查日志");
+		LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+        logger.error(e.getMessage());
+        Map<String,Object> m=new HashMap<String,Object>();
+		m.put("time", ""+time);
+		return new Message(0, m, e.getMessage());
         
     }
 

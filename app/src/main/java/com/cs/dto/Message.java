@@ -37,7 +37,7 @@ public class Message {
 		this.status = status;
 		this.msg = msg;
 	}
-	   
+	
    
    
 }

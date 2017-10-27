@@ -13,9 +13,6 @@ import org.springframework.stereotype.Controller;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@Controller
-@EnableScheduling
-@EnableSwagger2
 public class Application  {
 
 
