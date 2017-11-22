@@ -6,11 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Controller;
 
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import com.cs.config.WXConfig;
+
+
 
 @SpringBootApplication
 public class Application  {
@@ -24,13 +24,19 @@ public class Application  {
 
 
 	 @Bean  
-	    public MultipartConfigElement multipartConfigElement() {  
-	        MultipartConfigFactory factory = new MultipartConfigFactory();  
-	        factory.setMaxFileSize("3MB"); //KB,MB  
-	        factory.setMaxRequestSize("102400KB");  
-	        return factory.createMultipartConfig();  
-	    }  
+    public MultipartConfigElement multipartConfigElement() {  
+        MultipartConfigFactory factory = new MultipartConfigFactory();  
+        factory.setMaxFileSize("3MB"); //KB,MB  
+        factory.setMaxRequestSize("102400KB");  
+        return factory.createMultipartConfig();  
+    }  
 	
+	 
+	 @Bean
+	 public  WXConfig   initConfig(){
+		 return new WXConfig();
+	 }
+	 
 	 
 	 
 	 

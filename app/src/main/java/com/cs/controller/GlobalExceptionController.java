@@ -11,17 +11,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.cs.dto.Message;
 
-//@ControllerAdvice
-@RestControllerAdvice 
+@ControllerAdvice
 public class GlobalExceptionController {
 
 	private Logger logger = LoggerFactory.getLogger(GlobalExceptionController.class);
 	
-	//@ResponseBody
+	@ResponseBody
     @ExceptionHandler(Exception.class)
     public Message handleException(Exception e) {
 		LocalDateTime time = LocalDateTime.of(LocalDate.now(), LocalTime.now());
