@@ -1,12 +1,6 @@
-﻿## springboot demo
+﻿## springboot weixin demo
 
-* swagger-ui
-* http+json
-* security 认证
-
-
-全局异常处理
-ControllerAdvice
+* security 认证 swagger-ui
 
 
 

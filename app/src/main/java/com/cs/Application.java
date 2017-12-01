@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 
 import com.cs.config.WXConfig;
+import com.cs.util.SnowflakeIdWorker;
 
 
 
@@ -37,7 +38,10 @@ public class Application  {
 		 return new WXConfig();
 	 }
 	 
-	 
+	 @Bean
+	 public SnowflakeIdWorker  getId(){
+		 return new SnowflakeIdWorker(0, 0);
+	 }
 	 
 	 
 }

@@ -4,10 +4,11 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
+
+import com.cs.dto.wx.OutputNewsMessage;
 import com.cs.annotation.XStreamCDATA;
-import com.cs.pojo.Item;
-import com.cs.pojo.OutputNewsMessage;
 import com.thoughtworks.xstream.XStream;  
 import com.thoughtworks.xstream.annotations.XStreamAlias;  
 import com.thoughtworks.xstream.core.util.QuickWriter;  
@@ -23,7 +24,7 @@ import com.thoughtworks.xstream.io.xml.XppDriver;
  * @since  2017年11月22日
  * @authour cs
  */
-public class SerializeXmlUtil {
+public class XStreamCDATATransform {
 
 	 /**
 	  * 
@@ -52,6 +53,23 @@ public class SerializeXmlUtil {
                         }    
                     }    
     
+                    @Override
+                    public void setValue(String text) {
+                        if(text!=null && !"".equals(text)){
+                            //浮点型判断
+                            Pattern patternInt = Pattern.compile("[0-9]*(\\.?)[0-9]*");
+                            //整型判断
+                            Pattern patternFloat = Pattern.compile("[0-9]+");
+                            //如果是整数或浮点数 就不要加[CDATA[]了
+                            if(patternInt.matcher(text).matches() || patternFloat.matcher(text).matches()){
+                                cdata = false;
+                            }else{
+                                 cdata = true;
+                            }
+                        }
+                        super.setValue(text);  
+                    }
+                    
                     @Override    
                     protected void writeText(QuickWriter writer, String text) {    
                         if (cdata) {    
@@ -107,36 +125,6 @@ public class SerializeXmlUtil {
         return false;    
     }    
     
-    
-    public static void main(String[] args) {
-		 XStream xs = SerializeXmlUtil. createXstream(); 
-		 xs.processAnnotations(OutputNewsMessage.class);
-   	 xs.alias("xml", OutputNewsMessage.class); 
-   	 //xs.autodetectAnnotations(true);
-   	 OutputNewsMessage nm = new OutputNewsMessage();
-   	 nm.setToUserName("toUserName");
-   	 nm.setFromUserName("fromUserName");
-   	 nm.setMsgType("news");
-   	 nm.setCreateTime(System.nanoTime());
-   	 nm.setArticleCount(3);
-   	 List<Item>  li = new ArrayList<Item>();
-   	 for (int i = 0; i < 3; i++) {
-			Item item = new Item();
-			item.setTitle("文档"+1);
-			item.setPicUrl(i+"pu");
-			item.setUrl("url");
-			item.setDescription("desc");
-			li.add(item);
-		}
-   	  nm.setArticles(li);
    
-   	 String xml = " ";
-        try{
-           xml = xs.toXML(nm);
-        }catch(Exception e){
-      	  e.printStackTrace();
-        }
-        System.err.println(xml);
-	}
 
 }

@@ -15,7 +15,7 @@ import com.cs.config.WXConfig;
  * @since  2017年11月22日
  * @authour cs
  */
-public class CheckoutUtil {
+public class Check {
 	// 与接口配置信息中的Token要一致
     private static String token = WXConfig.Token;
 

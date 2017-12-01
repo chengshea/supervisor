@@ -1,9 +1,9 @@
-package com.cs.pojo;
+package com.cs.dto.wx;
 
 
 import java.util.List;
 
-
+import com.cs.annotation.XStreamCDATA;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
@@ -70,6 +70,47 @@ public class OutputNewsMessage extends OutputMessage {
 	}
 
     
+	@XStreamAlias("Item")
+	public static class Item {
+
+		@XStreamAlias("Title")
+		@XStreamCDATA
+		private String Title;
+		@XStreamAlias("Description")
+		@XStreamCDATA
+		private String Description;
+		@XStreamAlias("PicUrl")
+		@XStreamCDATA
+		private String PicUrl;
+		@XStreamAlias("Url")
+		@XStreamCDATA
+		private String Url;
+		public String getTitle() {
+			return Title;
+		}
+		public void setTitle(String title) {
+			Title = title;
+		}
+		public String getDescription() {
+			return Description;
+		}
+		public void setDescription(String description) {
+			Description = description;
+		}
+		public String getPicUrl() {
+			return PicUrl;
+		}
+		public void setPicUrl(String picUrl) {
+			PicUrl = picUrl;
+		}
+		public String getUrl() {
+			return Url;
+		}
+		public void setUrl(String url) {
+			Url = url;
+		}
+
+	}
 	
 }
 

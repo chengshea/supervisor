@@ -1,4 +1,4 @@
-package com.cs.pojo;
+package com.cs.dto.wx;
 
 
 
@@ -23,6 +23,7 @@ public class OutputMessage {
     @XStreamCDATA 
     private String MsgType;    
    
+    
 
 	public String getToUserName() {
 		return ToUserName;
@@ -70,6 +71,16 @@ public class OutputMessage {
 		// TODO Auto-generated constructor stub
 	}
 
-    
+	   @XStreamAlias("MediaId")    
+	    @XStreamCDATA    
+	    private String MediaId;    
+	    
+	    public String getMediaId() {    
+	        return MediaId;    
+	    }    
+	    
+	    public void setMediaId(String mediaId) {    
+	        MediaId = mediaId;    
+	    }    
 
 }
