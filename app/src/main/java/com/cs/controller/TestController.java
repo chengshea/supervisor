@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -100,6 +101,21 @@ public class TestController {
 		   m.put("path", load);
 			return new Message(1, m, "上传成功");
 		
+	}
+
+	
+
+	@RequestMapping(value = "/pay", method = RequestMethod.GET)
+	public String testhtml(HttpServletRequest request,HttpServletResponse respose) {
+		StringBuffer sb = new StringBuffer();
+		StringBuffer append = sb.append("<script>window.location.href='http://www.baidu.com';</script>");
+		sb.append("<div style='text-align:center'><div style='margin:0 auto;width:500px;height:300px;'><br/><br/><br/>" + append.toString() + "</div></div>");
+		try {
+			respose.getWriter().write(sb.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

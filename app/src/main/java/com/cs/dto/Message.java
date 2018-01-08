@@ -3,17 +3,27 @@ package com.cs.dto;
 
 public class Message {
      
-   private int status;	
+   private int code;	
    private 	Object  data;
    private String msg;
+   private int count;
    
    
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
+   
+	public int getCount() {
+	return count;
+}
+public void setCount(int count) {
+	this.count = count;
+}
+	
+
+	public int getCode() {
+	return code;
+}
+public void setCode(int code) {
+	this.code = code;
+}
 	public Object getData() {
 		return data;
 	}
@@ -28,14 +38,29 @@ public class Message {
 	}
 	public Message(int status, Object data, String msg) {
 		super();
-		this.status = status;
+		this.code = status;
 		this.data = data;
 		this.msg = msg;
 	}
 	public Message(int status, String msg) {
-		this.status = status;
+		this.code = status;
 		this.msg = msg;
 	}
+	public Message(int code, Object data) {
+		super();
+		this.code = code;
+		this.data = data;
+	}
+	
+	
+	public Message(int status, Object data, String msg, int count) {
+		super();
+		this.code = status;
+		this.data = data;
+		this.msg = msg;
+		this.count = count;
+	}
+	
 	
    
    

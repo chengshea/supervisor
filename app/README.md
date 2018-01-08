@@ -1,6 +1,6 @@
-﻿## springboot weixin demo
+﻿## springboot 微信获取openId demo
 
-* security 认证 swagger-ui
+
 
 
 

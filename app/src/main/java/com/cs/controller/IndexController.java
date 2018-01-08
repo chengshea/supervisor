@@ -1,7 +1,10 @@
 package com.cs.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +28,7 @@ import com.cs.constant.Event;
 import com.cs.constant.MsgType;
 import com.cs.dto.Message;
 import com.cs.dto.wx.InputMessage;
+import com.cs.model.UserInfo;
 import com.cs.pojo.WXUserInfo;
 import com.cs.util.XStreamCDATATransform;
 import com.cs.util.Check;
@@ -50,7 +55,14 @@ public class IndexController {
 	private SnowflakeIdWorker id;
 	
 	    @RequestMapping("/")
-	    public String index() {
+	    public String index(Map<String,Object> map) {
+	 
+//	        return "index";
+	    	return "/user/user-list";
+	    }
+	    
+	    @RequestMapping("/api-ui")
+	    public String api() {
 	        return "forward:/swagger-ui.html";
 	    }
 	    
